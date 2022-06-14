@@ -572,6 +572,21 @@
                             Default</button></div>
                 </div>
                 <br>
+                <div>
+                    <label for="is-mythic-input"><b>Mythic Creature:</b> <input type="checkbox"
+                            id="is-mythic-input" onclick="FormFunctions.ShowHideMythicCreature()"></label>
+                </div>
+                <div id="mythic-actions-form">
+                    <br>
+                    <b>Mythic Actions Description:</b>
+                    <div><label for="mythic-trait-input" style="width: 100%;">Trait Name: <input id="mythic-trait-input"
+                                type="text" value="" style="margin-right: 40px; width: 30%;" onblur="InputFunctions.MythicTraitInput()"></label></div>
+                    <div><label for="mythic-actions-input" style="width: 100%"><textarea
+                                id="mythic-actions-input" rows="4"></textarea></label></div>
+                    <div><button type="button" onclick="InputFunctions.MythicActionsDefaultInput()">Reset to
+                            Default</button></div>
+                </div>
+                <br>
                 <b>Abilities:</b>
                 <div><label for="abilities-name-input" style="width: 100%;">Name: <input id="abilities-name-input"
                             type="text" value="" style="margin-right: 40px; width: 30%;"></label></div>
@@ -591,6 +606,8 @@
                         Lair Action</button>
                     <button type="button" id="add-regional-button"
                         onclick="InputFunctions.AddAbilityInput('regionals')">Add Regional Effect</button>
+                    <button type="button" id="add-mythic-button"
+                        onclick="InputFunctions.AddAbilityInput('mythic')">Add Mythic Action</button>
                 </div>
                 <div>
                     <select id="common-ability-input"></select>
@@ -637,6 +654,9 @@
                     </div>
                     <div id="regionals-input-section"><b>Regional Effects:</b><br>
                         <ul id="regionals-input-list" class="statblock-list"></ul>
+                    </div>
+                    <div id="mythic-input-section"><b>Mythic Actions:</b><br>
+                        <ul id="mythic-input-list" class="statblock-list"></ul>
                     </div>
                 </div>
                 <br>

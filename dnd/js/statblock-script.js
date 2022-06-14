@@ -44,6 +44,8 @@ var mon = {
     isRegional: false,
     regionalDescription: "",
     regionalDescriptionEnd: "",
+    isMythic: false,
+    mythicDescription: "",
     properties: [],
     abilities: [],
     actions: [],
@@ -52,6 +54,7 @@ var mon = {
     legendaries: [],
     lairs: [],
     regionals: [],
+    mythics: [],
     sthrows: [],
     skills: [],
     damagetypes: [],
@@ -620,9 +623,19 @@ var FormFunctions = {
                 $("#add-lair-button, #lair-actions-form").show();
             if ($("#has-regional-input:checked").val())
                 $("#add-regional-button, #regional-actions-form").show();
+            $("#is-mythic-input").show();
         } else {
             $("#add-legendary-button, #legendary-actions-form").hide();
             $("#add-lair-button, #add-regional-button, #lair-actions-form, #regional-actions-form").hide();
+            $("#is-mythic-input").hide();
+        }
+    },
+  
+    ShowHideMythicCreature: function () {
+        if ($("#is-mythic-input:checked").val()) {
+            $("#add-mythic-button, #mythic-actions-form").show();
+        } else {
+            $("#add-mythic-button, #mythic-actions-form").hide();
         }
     },
 
@@ -671,6 +684,11 @@ var FormFunctions = {
     // For setting the legendary action description
     SetLegendaryDescriptionForm: function () {
         $("#legendaries-descsection-input").val(mon.legendariesDescription);
+    },
+
+    // For setting the mythic action description
+    SetLegendaryDescriptionForm: function () {
+        $("#mythic-descsection-input").val(mon.mythicDescription);
     },
 
     // For setting the lair action description
@@ -897,6 +915,12 @@ var InputFunctions = {
         FormFunctions.SetRegionalDescriptionForm();
         GetVariablesFunctions.RegionalDescriptionEndDefault();
         FormFunctions.SetRegionalDescriptionEndForm();
+    },
+
+    // Reset mythic description to default
+    MythicDescriptionDefaultInput: function () {
+        GetVariablesFunctions.MythicDescriptionDefault();
+        FormFunctions.SetMythicDescriptionForm();
     },
 
     AddCommonAbilityInput: function () {
@@ -1480,6 +1504,12 @@ var GetVariablesFunctions = {
     RegionalDescriptionEndDefault: function () {
         let monsterName = name.toLowerCase();
         mon.regionalDescriptionEnd = "If the " + mon.name.toLowerCase() + " dies, the first two effects fade over the course of 3d10 days.";
+    },
+
+    // Return the default mythic description
+    MythicDescriptionDefault: function () {
+        let monsterName = name.toLowerCase();
+        mon.legendariesDescription = "If the " + mon.name.toLowerCase() + " drops to 0HP, it regains all its HP and can use the options below as legendary actions.";
     }
 }
 
