@@ -623,12 +623,15 @@ var FormFunctions = {
                 $("#add-lair-button, #lair-actions-form").show();
             if ($("#has-regional-input:checked").val())
                 $("#add-regional-button, #regional-actions-form").show();
-            $("#is-mythic-input").show();
+            $("#is-mythic-form").show();
         } else {
             $("#add-legendary-button, #legendary-actions-form").hide();
             $("#add-lair-button, #add-regional-button, #lair-actions-form, #regional-actions-form").hide();
-            $("#is-mythic-input").hide();
+            $("#is-mythic-form").hide();
         }
+        
+        // check if mythic
+        this.ShowHideMythicCreature();
     },
   
     ShowHideMythicCreature: function () {
@@ -687,8 +690,8 @@ var FormFunctions = {
     },
 
     // For setting the mythic action description
-    SetLegendaryDescriptionForm: function () {
-        $("#mythic-descsection-input").val(mon.mythicDescription);
+    SetMythicDescriptionForm: function () {
+        $("#mythic-description-input").val(mon.mythicDescription);
     },
 
     // For setting the lair action description
@@ -922,6 +925,8 @@ var InputFunctions = {
         GetVariablesFunctions.MythicDescriptionDefault();
         FormFunctions.SetMythicDescriptionForm();
     },
+    
+    // update 
 
     AddCommonAbilityInput: function () {
         let commonAbility = data.commonAbilities[$("#common-ability-input").val()];
@@ -1509,7 +1514,7 @@ var GetVariablesFunctions = {
     // Return the default mythic description
     MythicDescriptionDefault: function () {
         let monsterName = name.toLowerCase();
-        mon.legendariesDescription = "If the " + mon.name.toLowerCase() + " drops to 0HP, it regains all its HP and can use the options below as legendary actions.";
+        mon.mythicDescription = "If the " + mon.name.toLowerCase() + " drops to 0HP, it regains all its HP and can use the options below as legendary actions.";
     }
 }
 
@@ -1871,7 +1876,7 @@ $(function () {
         });
 
     // Load the json data
-    $.getJSON("js/JSON/statblockdata.json", function (json) {
+    $.getJSON("https://raw.githubusercontent.com/JasaZnidar/Tetra-cube.github.io/statblock-mythic/dnd/js/JSON/statblockdata.json", function (json) {
         data = json;
 
         // Set the default monster in case there isn't one saved
