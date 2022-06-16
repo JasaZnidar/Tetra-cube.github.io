@@ -565,6 +565,10 @@ var FormFunctions = {
         $("#has-regional-input").prop("checked", mon.isRegional);
         this.ShowHideRegional();
 
+        // Is Mythic?	
+        $("#is-mythic-input").prop("checked", mon.isMythic);
+        this.ShowHideMythicCreature();
+
         // Challenge Rating
         $("#cr-input").val(mon.cr);
         $("#custom-cr-input").val(mon.customCr);
@@ -1030,6 +1034,11 @@ var GetVariablesFunctions = {
             mon.regionalDescriptionEnd = $("#regional-end-descsection-input").val().trim();
         }
 
+        // Mythics
+        mon.isMythic = $("#is-mythic-input").prop("checked");
+        if (mon.isMythic)
+            mon.mythicsDescription = $("#mythic-description-input").val().trim();
+
         // One or two columns ?
         mon.doubleColumns = $("#2col-input").prop("checked");
     },
@@ -1279,6 +1288,14 @@ var GetVariablesFunctions = {
         }
         FormFunctions.SetRegionalDescriptionForm();
         FormFunctions.SetRegionalDescriptionEndForm();
+
+        // Mythic?
+        mon.isMythic = Array.isArray(preset.mythic_actions);
+        if (preset.mythic_desc == null || preset.mythic_desc.length == 0)
+            this.MythicDescriptionDefault();
+        else
+            mon.mythicDescription = preset.mythic_desc;
+        FormFunctions.SetMythicDescriptionForm();
 
         // Abilities
         mon.abilities = [];
