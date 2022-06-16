@@ -120,7 +120,10 @@ var SavedData = {
     RetrieveFromLocalStorage: function () {
         let savedData = localStorage.getItem("SavedData");
         if (savedData != undefined)
-            mon = JSON.parse(savedData);
+            // add keys individually (in case of older JSON some properties might me missing)
+            save = JSON.parse(savedData);
+            for (var key in save)
+                mon[key] = save[key];
     },
 
     RetrieveFromFile: function () {
@@ -1400,7 +1403,7 @@ var GetVariablesFunctions = {
     // Add abilities, actions, reactions, and legendary actions
 
     AddAbility: function (arrName, abilityName, abilityDesc) {
-        let arr = mon[arrName];
+        let arr = mon[arrName];        
         ArrayFunctions.ArrayInsert(arr, {
             "name": abilityName.trim(),
             "desc": abilityDesc.trim()
