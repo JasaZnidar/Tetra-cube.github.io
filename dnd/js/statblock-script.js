@@ -153,6 +153,9 @@ function UpdateStatblock(moveSeparationPoint) {
     if (mon.isRegional)
         separationMax += (mon.regionals.length == 0 ? 1 : mon.regionals.length);
 
+    if (mon.isMythic && mon.isLegendary)
+        separationMax += (mon.mythics.length == 0 ? 1 : mon.mythics.length);
+
     if (mon.separationPoint == undefined)
         mon.separationPoint = Math.floor(separationMax / 2);
 
@@ -231,7 +234,11 @@ function UpdateStatblock(moveSeparationPoint) {
             ["<h3>Regional Effects</h3><div class='property-block'>", StringFunctions.FormatString(ReplaceTags(StringFunctions.RemoveHtmlTags(mon.regionalDescription))), "</div></br><ul>"], false, true);
         traitsHTML.push("</ul>" + StringFunctions.FormatString(ReplaceTags(StringFunctions.RemoveHtmlTags(mon.regionalDescriptionEnd))));
     }
-
+    if (mon.isMythic && mon.isLegendary && (mon.mythics.length > 0 || mon.mythicDescription.length > 0))
+        AddToTraitList(traitsHTML, mon.mythics, mon.mythicDescription == "" ?
+        "<h3>Mythic Actions</h3><div class='property-block'></div>" :
+        ["<h3>Mythic Actions</h3><div class='property-block'></div>", StringFunctions.FormatString(ReplaceTags(StringFunctions.RemoveHtmlTags(mon.mythicDescription))), "</div></br>"]);
+    
     // Add traits, taking into account the width of the block (one column or two columns)
     let leftTraitsArr = [],
         rightTraitsArr = [],
@@ -544,6 +551,7 @@ var FormFunctions = {
         this.MakeDisplayList("legendaries", false, true);
         this.MakeDisplayList("lairs", false, true);
         this.MakeDisplayList("regionals", false, true);
+        this.MakeDisplayList("mythics", false, false);
 
         // Is Legendary?	
         $("#is-legendary-input").prop("checked", mon.isLegendary);
