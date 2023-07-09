@@ -551,7 +551,7 @@ var FormFunctions = {
         this.MakeDisplayList("legendaries", false, true);
         this.MakeDisplayList("lairs", false, true);
         this.MakeDisplayList("regionals", false, true);
-        this.MakeDisplayList("mythics", false, false);
+        this.MakeDisplayList("mythics", false, true);
 
         // Is Legendary?	
         $("#is-legendary-input").prop("checked", mon.isLegendary);
@@ -1037,7 +1037,7 @@ var GetVariablesFunctions = {
         // Mythics
         mon.isMythic = $("#is-mythic-input").prop("checked");
         if (mon.isMythic)
-            mon.mythicsDescription = $("#mythic-description-input").val().trim();
+            mon.mythicDescription = $("#mythic-description-input").val().trim();
 
         // One or two columns ?
         mon.doubleColumns = $("#2col-input").prop("checked");
